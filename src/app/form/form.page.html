@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email:</ion-label>
+        <ion-input color="danger" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="emailField.errors && emailField.dirty">
+        <ion-text color="danger">
+          <p *ngIf="emailField.hasError('email')">El correo es invalido</p>
+          <p *ngIf="emailField.hasError('required')">El correo es obligatorio</p>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cellphone:</ion-label>
+        <ion-input type="tel" formControlName="cellphone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Edad:</ion-label>
+        <ion-input type="number" formControlName="age"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="ageField.errors && ageField.dirty">
+        <ion-text color="danger">
+          <p *ngIf="ageField.hasError('required')">La edad es obligatoria</p>
+          <p *ngIf="ageField.hasError('age')">esto es solo para adultos</p>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">bio:</ion-label>
+        <ion-textarea formControlName="text"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" [disabled]="form.invalid">
+      Enviar
+    </ion-button>
+  </form>
+</ion-content>
